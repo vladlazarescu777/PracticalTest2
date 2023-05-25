@@ -12,17 +12,17 @@ public class ClientThread extends Thread {
     private final String address;
     private final int port;
     private final String city;
-    private final String informationType;
-    private final TextView weatherForecastTextView;
+//    private final String informationType;
+    //private final TextView weatherForecastTextView;
 
     private Socket socket;
 
-    public ClientThread(String address, int port, String city, String informationType, TextView weatherForecastTextView) {
+    public ClientThread(String address, int port, String city){//, String informationType, TextView weatherForecastTextView) {
         this.address = address;
         this.port = port;
         this.city = city;
-        this.informationType = informationType;
-        this.weatherForecastTextView = weatherForecastTextView;
+        //this.informationType = informationType;
+        //this.weatherForecastTextView = weatherForecastTextView;
     }
 
     @Override
@@ -38,17 +38,17 @@ public class ClientThread extends Thread {
             // sends the city and information type to the server
             printWriter.println(city);
             printWriter.flush();
-            printWriter.println(informationType);
+            //printWriter.println(informationType);
             printWriter.flush();
             String weatherInformation;
 
             // reads the weather information from the server
-            while ((weatherInformation = bufferedReader.readLine()) != null) {
-                final String finalizedWeateherInformation = weatherInformation;
-
-                // updates the UI with the weather information. This is done using postt() method to ensure it is executed on UI thread
-                weatherForecastTextView.post(() -> weatherForecastTextView.setText(finalizedWeateherInformation));
-            }
+//            while ((weatherInformation = bufferedReader.readLine()) != null) {
+//                final String finalizedWeateherInformation = weatherInformation;
+//
+//                // updates the UI with the weather information. This is done using postt() method to ensure it is executed on UI thread
+//                weatherForecastTextView.post(() -> weatherForecastTextView.setText(finalizedWeateherInformation));
+//            }
         } // if an exception occurs, it is logged
         catch (IOException ioException) {
             Log.e(Constants.TAG, "[CLIENT THREAD] An exception has occurred: " + ioException.getMessage());

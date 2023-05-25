@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
         clientAddressEditText = findViewById(R.id.client_address_edit_text);
         clientPortEditText = findViewById(R.id.client_port_edit_text);
-        cityEditText = findViewById(R.id.city_edit_text);
-        informationTypeSpinner = findViewById(R.id.information_type_spinner);
+        cityEditText = findViewById(R.id.edit_word);
+//        informationTypeSpinner = findViewById(R.id.information_type_spinner);
         Button getWeatherForecastButton = findViewById(R.id.get_weather_forecast_button);
         getWeatherForecastButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,15 +66,12 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 String city = cityEditText.getText().toString();
-                String informationType = informationTypeSpinner.getSelectedItem().toString();
-                if (city.isEmpty() || informationType.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "[MAIN ACTIVITY] Parameters from client (city / information type) should be filled", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                Log.d("myTag1", "This is my message1");
+                //Toast.makeText(MainActivity.this, resu, Toast.LENGTH_SHORT).show();
 
-                weatherForecastTextView.setText(Constants.EMPTY_STRING);
+//                weatherForecastTextView.setText(Constants.EMPTY_STRING);
 
-                ClientThread clientThread = new ClientThread(clientAddress, Integer.parseInt(clientPort), city, informationType, weatherForecastTextView);
+                ClientThread clientThread = new ClientThread(clientAddress, Integer.parseInt(clientPort), city);//, weatherForecastTextView);
                 clientThread.start();
             }
         });

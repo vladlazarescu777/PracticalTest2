@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class ServerThread extends Thread {
     private ServerSocket serverSocket = null;
 
-    private final HashMap<String, WeatherForecastInformation> data;
+    private final HashMap<String, Information> data;
 
     public ServerThread(int port) {
         try {
@@ -27,11 +27,11 @@ public class ServerThread extends Thread {
         return serverSocket;
     }
 
-    public synchronized void setData(String city, WeatherForecastInformation weatherForecastInformation) {
+    public synchronized void setData(String city, Information weatherForecastInformation) {
         this.data.put(city, weatherForecastInformation);
     }
 
-    public synchronized HashMap<String, WeatherForecastInformation> getData() {
+    public synchronized HashMap<String, Information> getData() {
         return data;
     }
 
@@ -48,6 +48,8 @@ public class ServerThread extends Thread {
                 // create a new CommunicationThread object for each client that connects to the server
                 CommunicationThread communicationThread = new CommunicationThread(this, socket);
                 communicationThread.start();
+
+                Log.d("myTag", "This is my message");
             }
         } catch (IOException clientProtocolException) {
             Log.e(Constants.TAG, "[SERVER THREAD] An exception has occurred: " + clientProtocolException.getMessage());
